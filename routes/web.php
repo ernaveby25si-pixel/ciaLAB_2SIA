@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/pcr', function () {
@@ -24,14 +25,11 @@ Route::get('/nim/{param1?}', function ($param1 = '') {
     return 'NIM saya: '.$param1;
 }); 
 
-use App\Http\Controllers\MahasiswaController;
 
 Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::get('/about', function () {
     return view('halaman-about');
 });
-
-use App\Http\Controllers\HomeController;
 
 Route::get('/home', [HomeController::class, 'index']);
