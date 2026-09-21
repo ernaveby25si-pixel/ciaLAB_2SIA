@@ -31,3 +31,7 @@ Route::resource('mahasiswa', MahasiswaController::class);
 Route::get('/about', function () {
     return view('halaman-about');
 });
+
+use App\Http\Controllers\HomeController;
+
+Route::get('/home', [HomeController::class, 'index']);
