@@ -47,3 +47,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 		->name('dashboard.index');
 
 Route::resource('pelanggan', PelangganController::class);
+
+Route::get('/pelanggan', [PelangganController::class, 'index'])
+    ->name('pelanggan.index');
+
+Route::post('/pelanggan', [PelangganController::class, 'store'])
+    ->name('pelanggan.store');
+
+    
