@@ -45,22 +45,17 @@ Route::post('question/store', [QuestionController::class, 'store'])
 Route::get('/question', [QuestionController::class, 'index'])
 		->name('question.index');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-		->name('dashboard.index');
+Route::group(['middleware' => ['checkislogin']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('pelanggan', PelangganController::class);
+    Route::resource('pelanggan', PelangganController::class)->middleware(['checkrole:Super Admin,Mitra']);
+    Route::resource('user', UserController::class)->middleware(['checkrole:Super Admin']);
 
-Route::get('/pelanggan', [PelangganController::class, 'index'])
-    ->name('pelanggan.index');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
 
-Route::post('/pelanggan', [PelangganController::class, 'store'])
-    ->name('pelanggan.store');
-
-Route::resource('user', UserController::class);
-Route::resource('users', UserController::class);
-
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/login', [AuthController::class, 'index'])->name('auth.index');
+Route::get('/auth/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth')
-    ->name('auth.logout');

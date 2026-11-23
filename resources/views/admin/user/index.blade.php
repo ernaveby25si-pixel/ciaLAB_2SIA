@@ -44,6 +44,7 @@
                                     <th class="border-0 rounded-start">No</th>
                                     <th class="border-0">Nama Lengkap</th>
                                     <th class="border-0">Email</th>
+                                    <th class="border-0">ROLE</th>
                                     <th class="border-0">Terdaftar Pada</th>
                                     <th class="border-0 rounded-end text-center">Aksi</th>
                                 </tr>
@@ -67,6 +68,17 @@
                                             </div>
                                         </td>
                                         <td>{{ $item->email }}</td>
+                                        <td>
+                                            @if($item->role === 'Super Admin')
+                                                <span class="badge bg-danger">{{ $item->role }}</span>
+                                            @elseif($item->role === 'Pelanggan')
+                                                <span class="badge bg-info text-dark">{{ $item->role }}</span>
+                                            @elseif($item->role === 'Mitra')
+                                                <span class="badge bg-warning text-dark">{{ $item->role }}</span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $item->role ?? '-' }}</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->created_at ? $item->created_at->format('d M Y, H:i') : '-' }}</td>
                                         <td class="text-center">
                                             <div class="btn-group" role="group">
@@ -106,7 +118,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center py-4 text-muted">
+                                        <td colspan="6" class="text-center py-4 text-muted">
                                             <em>Belum ada data user yang terdaftar.</em>
                                         </td>
                                     </tr>

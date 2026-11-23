@@ -35,6 +35,7 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
+            'role'     => 'required|in:Super Admin,Pelanggan,Mitra',
         ], [
             'name.required'      => 'Nama lengkap wajib diisi.',
             'name.max'           => 'Nama maksimal 255 karakter.',
@@ -44,6 +45,8 @@ class UserController extends Controller
             'password.required'  => 'Password wajib diisi.',
             'password.min'       => 'Password minimal harus 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'role.required'      => 'Role wajib dipilih.',
+            'role.in'            => 'Pilihan role harus salah satu dari: Super Admin, Pelanggan, atau Mitra.',
         ]);
 
         // 2. Simpan Data dengan Hash::make
@@ -51,6 +54,7 @@ class UserController extends Controller
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'role'     => $validated['role'],
         ]);
 
         // 3. Redirect dengan Pesan Sukses
@@ -87,6 +91,7 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:6|confirmed',
+            'role'     => 'required|in:Super Admin,Pelanggan,Mitra',
         ], [
             'name.required'      => 'Nama lengkap wajib diisi.',
             'name.max'           => 'Nama maksimal 255 karakter.',
@@ -95,11 +100,14 @@ class UserController extends Controller
             'email.unique'       => 'Email sudah digunakan oleh akun lain.',
             'password.min'       => 'Password minimal harus 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak sesuai.',
+            'role.required'      => 'Role wajib dipilih.',
+            'role.in'            => 'Pilihan role harus salah satu dari: Super Admin, Pelanggan, atau Mitra.',
         ]);
 
         $dataToUpdate = [
             'name'  => $validated['name'],
             'email' => $validated['email'],
+            'role'  => $validated['role'],
         ];
 
         // 2. Jika password diisi, lakukan Hash::make

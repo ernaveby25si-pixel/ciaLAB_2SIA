@@ -55,6 +55,10 @@
                             <span class="fw-bold">{{ $user->email }}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between px-0">
+                            <span class="text-muted">Role</span>
+                            <span class="fw-bold">{{ $user->role ?? '-' }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
                             <span class="text-muted">Waktu Pendaftaran</span>
                             <span class="fw-bold">{{ $user->created_at ? $user->created_at->format('d F Y, H:i:s') : '-' }}</span>
                         </li>

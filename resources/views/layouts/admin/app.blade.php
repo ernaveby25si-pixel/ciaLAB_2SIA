@@ -47,15 +47,15 @@
     {{-- End sidebar --}}
 
     <main class="content">
-        {{-- start header--}
-      @include('layouts.admin.header')  
-         {{-- end header --}}
+        {{-- start header --}}
+        @include('layouts.admin.header')
+        {{-- end header --}}
 
         {{-- start main content --}}
         @yield('content')
         {{-- end main content --}}
 
-        {{-- start footer --}
+        {{-- start footer --}}
         @include('layouts.admin.footer')
         {{-- end footer --}}
     </main>
